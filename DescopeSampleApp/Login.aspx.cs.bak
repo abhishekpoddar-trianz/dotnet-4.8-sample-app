@@ -1,0 +1,19 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Microsoft.AspNetCore.Http;
+
+using System.Threading.Tasks;
+
+
+namespace DescopeSampleApp
+{
+    public partial class WebForm1     {
+RequestDelegate _next = null;        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+publicWebForm1(RequestDelegatenext){}    }
+}

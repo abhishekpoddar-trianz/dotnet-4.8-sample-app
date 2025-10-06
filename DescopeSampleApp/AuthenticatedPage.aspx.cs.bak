@@ -1,0 +1,20 @@
+using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Microsoft.AspNetCore.Http;
+
+using System.Threading.Tasks;
+
+
+namespace DescopeSampleApp
+{
+    public partial class WebForm2     {
+RequestDelegate _next = null;        protected async void Page_Load(object sender, EventArgs e)
+        {
+            
+        }
+publicWebForm2(RequestDelegatenext){}    }
+}
