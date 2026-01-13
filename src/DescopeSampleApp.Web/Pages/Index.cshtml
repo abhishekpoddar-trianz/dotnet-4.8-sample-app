@@ -1,0 +1,64 @@
+@page
+@model DescopeSampleApp.Web.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>@ViewData["Title"]</title>
+    <script src="https://unpkg.com/@@descope/web-js-sdk@@1.10.45/dist/index.umd.js"></script>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Authenticated Page!</h1>
+        <button id="testApiBtn" class="btn btn-primary">Click here to test Sample API</button>
+        <div id="apiResponse"></div>
+    </div>
+
+    <script>
+        const sdk = Descope({ projectId: '@Model.ProjectId', persistTokens: true, autoRefresh: true });
+
+        const sessionToken = sdk.getSessionToken();
+        const currentPath = window.location.pathname;
+        console.log(currentPath);
+        if ((sessionToken) && (!sdk.isJwtExpired(sessionToken))) {
+            // User is logged in
+        } else {
+            if (currentPath != '/Login') {
+                // Redirect to login page
+                window.location.replace('/Login');
+            }
+        }
+
+        document.getElementById('testApiBtn').addEventListener('click', async function(event) {
+            event.preventDefault();
+            const sessionToken = sdk.getSessionToken();
+            if (sessionToken && !sdk.isJwtExpired(sessionToken)) {
+                try {
+                    const response = await fetch("/api/sample", {
+                        headers: {
+                            "Authorization": `Bearer ${sessionToken}`
+                        }
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`Request failed with status ${response.status}`);
+                    }
+
+                    const responseData = await response.json();
+                    console.log(responseData);
+                    document.getElementById("apiResponse").innerHTML = `<p>Status Code: ${response.status}</p><pre>${JSON.stringify(responseData, null, 2)}</pre>`;
+                } catch (error) {
+                    console.error("Request failed:", error.message);
+                    document.getElementById("apiResponse").innerHTML = `<p>Error: ${error.message}</p>`;
+                }
+            } else {
+                window.location.replace('/Login');
+            }
+        });
+    </script>
+</body>
+</html>
