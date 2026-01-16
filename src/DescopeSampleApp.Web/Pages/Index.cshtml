@@ -1,0 +1,18 @@
+@page
+@model DescopeSampleApp.Web.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container mt-5">
+    <div class="text-center">
+        <h1 class="display-4">Welcome to Descope Sample App</h1>
+        <p class="lead">ASP.NET Core 8.0 Application</p>
+        <hr class="my-4">
+        <p>This application has been migrated from ASP.NET Web Forms to .NET 8</p>
+        <div class="mt-4">
+            <a class="btn btn-primary btn-lg" asp-page="/Login" role="button">Login</a>
+            <a class="btn btn-secondary btn-lg" asp-page="/Authenticated" role="button">Authenticated Page</a>
+        </div>
+    </div>
+</div>
