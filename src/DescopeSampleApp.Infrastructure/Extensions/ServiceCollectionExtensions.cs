@@ -18,9 +18,20 @@ public static class ServiceCollectionExtensions
     {
         // Register DbContext
         services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(
+        {
+            options.UseNpgsql(
                 configuration.GetConnectionString("DefaultConnection"),
-                b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+                b =>
+                {
+                    b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
+                    b.MigrationsHistoryTable("__efmigrations_history", "public");
+                    b.EnableRetryOnFailure(maxRetryCount: 5, maxRetryDelay: TimeSpan.FromSeconds(30), errorCodesToAdd: null);
+                })
+                .UseSnakeCaseNamingConvention()
+                .EnableSensitiveDataLogging(configuration.GetValue<bool>("Logging:EnableSensitiveDataLogging"));
+
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+        });
 
         // Register repositories
         services.AddScoped<IUserRepository, UserRepository>();

@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
@@ -10,6 +10,16 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DescopeSampleApp.Infrastructure", "src\DescopeSampleApp.Infrastructure\DescopeSampleApp.Infrastructure.csproj", "{C3D4E5F6-G7H8-9012-CDEF-123456789012}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DescopeSampleApp.Web", "src\DescopeSampleApp.Web\DescopeSampleApp.Web.csproj", "{D4E5F6G7-H8I9-0123-DEF1-234567890123}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F740F1D3-A263-4DF1-AF25-B574D7E2AEEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DescopeSampleApp.Domain.Tests", "Tests\DescopeSampleApp.Domain.Tests\DescopeSampleApp.Domain.Tests.csproj", "{FE141351-13CD-4C85-92EC-C1E62D45E4CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DescopeSampleApp.Application.Tests", "Tests\DescopeSampleApp.Application.Tests\DescopeSampleApp.Application.Tests.csproj", "{0FCCA412-C7C2-4D55-B438-F7EF548AE80C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DescopeSampleApp.Infrastructure.Tests", "Tests\DescopeSampleApp.Infrastructure.Tests\DescopeSampleApp.Infrastructure.Tests.csproj", "{02FB1B1E-8DB5-4D11-BAC9-18FAABD173A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DescopeSampleApp.Web.Tests", "Tests\DescopeSampleApp.Web.Tests\DescopeSampleApp.Web.Tests.csproj", "{44CA7517-715C-404E-AF0C-0362F66AE9F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,5 +43,27 @@ Global
 		{D4E5F6G7-H8I9-0123-DEF1-234567890123}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4E5F6G7-H8I9-0123-DEF1-234567890123}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4E5F6G7-H8I9-0123-DEF1-234567890123}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE141351-13CD-4C85-92EC-C1E62D45E4CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE141351-13CD-4C85-92EC-C1E62D45E4CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE141351-13CD-4C85-92EC-C1E62D45E4CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE141351-13CD-4C85-92EC-C1E62D45E4CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FCCA412-C7C2-4D55-B438-F7EF548AE80C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FCCA412-C7C2-4D55-B438-F7EF548AE80C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FCCA412-C7C2-4D55-B438-F7EF548AE80C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FCCA412-C7C2-4D55-B438-F7EF548AE80C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02FB1B1E-8DB5-4D11-BAC9-18FAABD173A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02FB1B1E-8DB5-4D11-BAC9-18FAABD173A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02FB1B1E-8DB5-4D11-BAC9-18FAABD173A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02FB1B1E-8DB5-4D11-BAC9-18FAABD173A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44CA7517-715C-404E-AF0C-0362F66AE9F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44CA7517-715C-404E-AF0C-0362F66AE9F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44CA7517-715C-404E-AF0C-0362F66AE9F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44CA7517-715C-404E-AF0C-0362F66AE9F0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FE141351-13CD-4C85-92EC-C1E62D45E4CA} = {F740F1D3-A263-4DF1-AF25-B574D7E2AEEC}
+		{0FCCA412-C7C2-4D55-B438-F7EF548AE80C} = {F740F1D3-A263-4DF1-AF25-B574D7E2AEEC}
+		{02FB1B1E-8DB5-4D11-BAC9-18FAABD173A1} = {F740F1D3-A263-4DF1-AF25-B574D7E2AEEC}
+		{44CA7517-715C-404E-AF0C-0362F66AE9F0} = {F740F1D3-A263-4DF1-AF25-B574D7E2AEEC}
 	EndGlobalSection
 EndGlobal
