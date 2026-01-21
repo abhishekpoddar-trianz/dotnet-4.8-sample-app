@@ -1,0 +1,61 @@
+@page
+@model DescopeSampleApp.Web.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Authenticated Page</title>
+    <script src="https://unpkg.com/&#64;descope/web-js-sdk&#64;1.10.45/dist/index.umd.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Authenticated Page!</h1>
+        <button id="testApiBtn" class="btn btn-primary">Click here to test Sample API</button>
+        <div id="apiResponse" class="mt-3"></div>
+    </div>
+
+    <script>
+        const sdk = Descope({ projectId: "@Model.ProjectId", persistTokens: true, autoRefresh: true });
+
+        const sessionToken = sdk.getSessionToken();
+        const currentPath = window.location.pathname;
+        
+        if (!(sessionToken) || sdk.isJwtExpired(sessionToken)) {
+            if (currentPath !== '/Login') {
+                window.location.replace('/Login');
+            }
+        }
+
+        document.getElementById('testApiBtn').addEventListener('click', async function(event) {
+            event.preventDefault();
+            const sessionToken = sdk.getSessionToken();
+            
+            if (sessionToken && !sdk.isJwtExpired(sessionToken)) {
+                try {
+                    const response = await fetch("/api/sample", {
+                        headers: {
+                            "Authorization": "Bearer " + sessionToken
+                        }
+                    });
+
+                    if (!response.ok) {
+                        throw new Error("Request failed with status " + response.status);
+                    }
+
+                    const responseData = await response.json();
+                    console.log(responseData);
+                    document.getElementById("apiResponse").innerHTML = "<p>Status Code: " + response.status + "</p><pre>" + JSON.stringify(responseData, null, 2) + "</pre>";
+                } catch (error) {
+                    console.error("Request failed:", error.message);
+                    document.getElementById("apiResponse").innerHTML = "<p class='text-danger'>Error: " + error.message + "</p>";
+                }
+            } else {
+                window.location.replace('/Login');
+            }
+        });
+    </script>
+</body>
+</html>
