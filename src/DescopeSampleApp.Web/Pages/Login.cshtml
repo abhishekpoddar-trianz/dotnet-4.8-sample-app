@@ -1,0 +1,31 @@
+@page
+@model DescopeSampleApp.Web.Pages.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <script src="https://unpkg.com/@@descope/web-js-sdk@@1.10.45/dist/index.umd.js"></script>
+    <script src="https://unpkg.com/@@descope/web-component@@3.11.14/dist/index.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Login</h1>
+        <descope-wc project-id="@Model.ProjectId" flow-id="sign-up-or-in"></descope-wc>
+    </div>
+
+    <script>
+        const wcElement = document.getElementsByTagName('descope-wc')[0];
+        const onSuccess = () => {
+            window.location.replace('/AuthenticatedPage');
+        };
+        const onError = (err) => console.log(err);
+
+        wcElement.addEventListener('success', onSuccess);
+        wcElement.addEventListener('error', onError);
+    </script>
+</body>
+</html>
