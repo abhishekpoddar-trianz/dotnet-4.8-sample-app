@@ -1,0 +1,102 @@
+@page
+@model DescopeSampleApp.Web.Pages.AuthenticatedModel
+@{
+    ViewData["Title"] = "Authenticated Page";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Authenticated Page</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/@@descope/web-js-sdk@@1.10.45/dist/index.umd.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #apiResponse {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Authenticated Page!</h1>
+    <p>You have successfully authenticated with Descope.</p>
+    <button onclick="testSampleAPI(event)">Click here to test Sample API</button>
+
+    <div id="apiResponse"></div>
+
+    <script>
+        const sdk = Descope({
+            projectId: "P2dI0leWLEC45BDmfxeOCSSOWiCt",
+            persistTokens: true,
+            autoRefresh: true
+        });
+
+        // Check authentication on page load
+        const sessionToken = sdk.getSessionToken();
+        const currentPath = window.location.pathname;
+
+        if (!sessionToken || sdk.isJwtExpired(sessionToken)) {
+            if (currentPath !== '/Login') {
+                window.location.replace('/Login');
+            }
+        }
+
+        async function testSampleAPI(event) {
+            event.preventDefault();
+            const sessionToken = sdk.getSessionToken();
+
+            if (sessionToken && !sdk.isJwtExpired(sessionToken)) {
+                try {
+                    const response = await fetch("/api/sample", {
+                        headers: {
+                            "Authorization": `Bearer ${sessionToken}`
+                        }
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`Request failed with status ${response.status}`);
+                    }
+
+                    const responseData = await response.json();
+                    console.log(responseData);
+                    document.getElementById("apiResponse").innerHTML =
+                        `<p><strong>Status Code:</strong> ${response.status}</p>
+                         <pre>${JSON.stringify(responseData, null, 2)}</pre>`;
+                } catch (error) {
+                    console.error("Request failed:", error.message);
+                    document.getElementById("apiResponse").innerHTML =
+                        `<p style="color: red;"><strong>Error:</strong> ${error.message}</p>`;
+                }
+            } else {
+                window.location.replace('/Login');
+            }
+        }
+    </script>
+</body>
+</html>
