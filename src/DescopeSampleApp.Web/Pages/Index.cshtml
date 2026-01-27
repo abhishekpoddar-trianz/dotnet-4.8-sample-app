@@ -1,0 +1,14 @@
+@page
+@model DescopeSampleApp.Web.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to Descope Sample App</h1>
+    <p>This application demonstrates authentication with Descope in .NET 8</p>
+    <p>
+        <a asp-page="/Login" class="btn btn-primary">Login</a>
+        <a asp-page="/Authenticated" class="btn btn-secondary">Authenticated Page</a>
+    </p>
+</div>
